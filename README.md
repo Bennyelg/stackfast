@@ -5,5 +5,5 @@ It was boring and I had 30 minutes spare time.
 ## Demo
 
 <kbd>
-  <img src="https://rawgit.com/Bennyelg/csvql/master/faststack.svg">
+  <img src="https://cdn.jsdelivr.net/gh/Bennyelg/csvql@master/faststack.svg">
 </kbd>
