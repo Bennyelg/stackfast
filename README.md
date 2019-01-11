@@ -7,3 +7,6 @@ It was boring and I had 30 minutes spare time.
 <kbd>
   <img src="https://cdn.jsdelivr.net/gh/Bennyelg/csvql@master/faststack.svg">
 </kbd>
+<p align="left">
+  <img src="https://github.com/bennyelg/faststack/blob/master/Images/faststack.svg">
+</p>
