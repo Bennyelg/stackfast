@@ -114,15 +114,13 @@ def input_parser() -> str:
     # dummy parser to be catch the user question.
     # // return: str
 
-    try:
-        question = input('\x1b[0;32m' + "Q: >> " + '\x1b[0m')
-        if not question:
-            return ""
-        if "exit" == question.lower():
-            sys.exit(1)
-        return question
-    except:
+    question = input('\x1b[0;32m' + "Q: >> " + '\x1b[0m')
+    if not question:
         return ""
+    if "exit" == question.lower():
+        sys.exit(1)
+    return question
+
 
 
 def clean_screen():
