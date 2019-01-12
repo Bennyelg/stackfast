@@ -52,8 +52,9 @@ def print_header():
 
 
 
-def display_post_discussion(question_data: Dict[str, str]) -> None:
+def display_selected_post_discussion(question_data: Dict[str, str]) -> None:
     # get's the question_data dict parse and display the post discussion.
+    # // input: question_data: {"url": "", "question": ""}
 
     print()
     ColorPrint.print_fail("QUESTION: [" + question_data["question"] + "]")
@@ -106,19 +107,24 @@ def display_questions(questions: List[Dict[str, str]]) -> None:
         else:
             ColorPrint.print_warn(f"{idx + 1}) {question['question']}")
         ColorPrint.print_bold("------------------------------------------")
+    ColorPrint.print_fail("`{question_number}`") 
+    ColorPrint.print_pass("   to print the question number to get the post disscussion..")
     ColorPrint.print_fail("`gbmm`") 
     ColorPrint.print_pass("   to go back to main menu and change your question..")
+    ColorPrint.print_fail("`exit`") 
+    ColorPrint.print_pass("   to exit..")
 
-
-def input_parser() -> str:
+def get_question() -> str:
     # dummy parser to be catch the user question.
     # // return: str
 
     question = input('\x1b[0;32m' + "Q: >> " + '\x1b[0m')
+
     if not question:
         return ""
     if "exit" == question.lower():
         sys.exit(1)
+
     return question
 
 
@@ -136,19 +142,24 @@ def display_questions_pickup_menu_screen(questions: List[Dict[str, str]]) -> Non
     while True:
         clean_screen()
         display_questions(questions)
-        answer = input('\x1b[0;32m' + "#No : >> " + '\x1b[0m')
+        answer = input('\x1b[0;32m' + ">> " + '\x1b[0m')
         clean_screen()
+        
         if "gbmm" in answer.lower():
             print_header()
             break
-
+        if "exit" in answer.lower():
+            print_header()
+            sys.exit(1)
+            break
+        
         try:
-            ans = int(answer)
-            if ans > len(questions):
+            selected_question_idx = int(answer)
+            if selected_question_idx > len(questions):
                 clean_screen()
                 ColorPrint.print_fail("Unknown Question #NO")
             else:
-                display_post_discussion(questions[ans - 1])
+                display_selected_post_discussion(questions[selected_question_idx - 1])
                 input('\x1b[0;32m' + "Go back (Enter)" + '\x1b[0m')
         except:
             pass
@@ -158,7 +169,7 @@ if __name__ == '__main__':
 
     print_header()
     while True:
-        question = input_parser()
+        question = get_question()
         if not question: continue
         try:
             questions = dig_top_matched_simillar_questions(question)
